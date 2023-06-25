@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-2">
+            <h1 class="heading">UPDATE RECIPE</h1>
+            <form class="editContainer" [formGroup]="recipeEditForm" (ngSubmit)="onSubmit()">
+                
+                <!-- RECIPE NAME -->
+                <div class="form-group">
+                    <label for="name">Recipe Name</label>
+                    <input class="form-control" type="text" id="name" formControlName="name">
+                    <span class="help-block" *ngIf="!recipeEditForm.get('name').valid && recipeEditForm.get('name').touched">please write a valid Name</span>
+                </div>
+                
+                <!-- RECIPE DISCRIPTION -->
+                <div class="form-group">
+                    <label for="desc">Recipe Description</label>
+                    <input type="text" id="desc" class="form-control" formControlName="desc">
+                    <span class="help-block" *ngIf="!recipeEditForm.get('desc').valid && recipeEditForm.get('desc').touched">please write a Description</span>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+                    <label for="url">Recipe Image URL</label>
+                    <input type="text" id="url" class="form-control" formControlName="url">
+                    <span class="help-block" *ngIf="!recipeEditForm.get('url').valid && recipeEditForm.get('url').touched">please write a valid password</span>
+                </div>
+
+                <!-- RECIPE CATEGORY -->
+                <div class="form-group">
+                    <label for="category">Select Category?</label>
+                    <input type="text" id="category" class="form-control" formControlName="category">
+                    <span class="help-block" *ngIf="!recipeEditForm.get('category').valid && recipeEditForm.get('category').touched">please select Category</span>
+                </div>
+                
+                <button class="btn btn-primary heading" type="submit" [disabled]="!recipeEditForm.get('name').valid || !recipeEditForm.get('desc').valid || !recipeEditForm.get('category').valid || !recipeEditForm.get('url').valid">UPDATE</button>
+                <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </form> 
+        </div>
+    </div>
+</div>

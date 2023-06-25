@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-2">
+            <h1 class="heading">ADD RECIPE</h1>
+            <form class="editContainer" [formGroup]="AddRecipe" (ngSubmit)="onSubmit()">
+                
+                <!-- RECIPE NAME -->
+                <div class="form-group">
+                    <label for="name">Recipe Name</label>
+                    <input class="form-control" type="text" id="name" formControlName="name">
+                    <span class="help-block" *ngIf="!AddRecipe.get('name').valid && AddRecipe.get('name').touched">please write a valid Name</span>
+                </div>
+                
+                <!-- RECIPE DISCRIPTION -->
+                <div class="form-group">
+                    <label for="desc">Recipe Description</label>
+                    <input type="text" id="desc" class="form-control" formControlName="desc">
+                    <span class="help-block" *ngIf="!AddRecipe.get('desc').valid && AddRecipe.get('desc').touched">please write a Description</span>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+                    <label for="url">Recipe Image URL</label>
+                    <input type="text" id="url" class="form-control" formControlName="url">
+                    <span class="help-block" *ngIf="!AddRecipe.get('url').valid && AddRecipe.get('url').touched">please write a valid password</span>
+                </div>
+
+                <!-- RECIPE CATEGORY -->
+                <div class="form-group">
+                    <label for="category">Select Category?</label>
+                    <input type="text" id="category" class="form-control" formControlName="category">
+                    <span class="help-block" *ngIf="!AddRecipe.get('category').valid && AddRecipe.get('category').touched">please define a Category</span>
+                </div>
+                
+                <button class="btn btn-success heading" type="submit" [disabled]="!AddRecipe.get('name').valid || !AddRecipe.get('desc').valid || !AddRecipe.get('category').valid || !AddRecipe.get('url').valid">ADD</button>
+                <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </form> 
+        </div>
+    </div>
+</div>

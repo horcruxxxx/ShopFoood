@@ -1,0 +1,18 @@
+.container {
+    margin-top: 30px;
+}
+.editContainer{
+  margin-left: -300px;
+}
+
+input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+  border: 3px solid red;
+}
+  
+input.ng-valid.ng-touched,select.ng-valid.ng-touched{
+  border:3px solid green;
+}
+
+.heading{
+  margin-left: 40%;
+}

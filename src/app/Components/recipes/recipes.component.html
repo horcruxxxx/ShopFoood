@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<!-- DISPLAYING LOADING SPINNER -->
+<div style="text-align: center;" *ngIf="loading">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+<!-- DISPLAYING RECIPES -->
+<div class="row" *ngIf="!loading">
+  <div class="col-md-5">
+    <div *ngFor="let category of Recipes_Array;let cat_idx = index">
+      <h2>{{ category.category }}</h2>
+      <div class="card-group">
+        <div class="card" *ngFor="let recipe of category.recipes;let idx = index" style="width: 18rem;">
+          <app-recipe-card [currentRecipe]="recipe" [CurrIndex]="idx" [CurrentCategory]="cat_idx" [CurrentRecipeID]="recipe.recipeID"></app-recipe-card>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary sticky-button" (click)="onClickAdd()">+</button>
+  </div>
+  <div class="col-md-7 editTab">
+    <router-outlet></router-outlet>
+  </div>
+</div>

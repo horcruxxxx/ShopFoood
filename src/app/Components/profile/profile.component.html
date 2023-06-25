@@ -1,0 +1,18 @@
+<h1 class="heading">MY PROFILE</h1>
+<div class="row mainContainer">
+  <div class="col-md-5">
+    <div class="card" style="width: 18rem;">
+      <img src="https://cdn3.iconfinder.com/data/icons/users-solid/60/50_-Blank_Profile-_user_people_group_team-512.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{username}}</h5>
+        <p class="card-text">ABOUT :</p>
+        <h6 class="card-title">HomeStateUrl :</h6>
+        <p class="card-text">{{homestateURL}}</p>
+        <button type="button" class="btn btn-primary" (click)="onClick()">Edit Info</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7 editContainer">
+      <router-outlet></router-outlet>
+  </div>
+</div>

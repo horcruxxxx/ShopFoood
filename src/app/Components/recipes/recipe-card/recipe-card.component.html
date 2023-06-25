@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="card bg-warning-subtle mt-4">
+    <div class="card-body">
+      <div class="image-section">
+        <img [src]="currentRecipe.recipeURL" class="card-img-top" alt="...">
+        <div class="category">{{ currentRecipe.recipeCategory | uppercase }}</div>
+      </div>
+      <div class="text-section">
+        <h3 class="card-title fw-bold">{{ currentRecipe.recipeName | uppercase }}</h3>
+        <p class="card-text">{{ currentRecipe.recipeDescription }}</p>
+      </div>
+      <div class="cta-section">
+        <button class="btn btn-success" (click)="addtocart(currentRecipe.recipeName)">add to cart</button>
+        <button class="btn btn-danger" (click)="onCLickdeleteRecipe()">delete</button>
+        <button class="btn btn-primary" (click)="onClickEdit()">edit</button>
+      </div>
+    </div>
+  </div>
+</div>

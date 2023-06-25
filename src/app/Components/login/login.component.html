@@ -1,0 +1,41 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            
+            <!-- DISPLAYING ERROR (if-any) -->
+            <div class="alert alert-danger" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+
+            <!-- FOR DISPLAYING LOADING SPINNER -->
+            <div *ngIf="loading" style="text-align: center;">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+
+            <!-- DISPALYING FORM WHEN NOT LOADING... -->
+            <h1 class="heading" *ngIf="!loading">LOGIN </h1>
+            <form [formGroup]="LoginForm"  (ngSubmit)="onSubmit()" *ngIf="!loading">
+                
+                <!-- EMAIL -->
+                <div class="form-group">
+                    <label for="email">Mail</label>
+                    <input type="email" id="email" class="form-control" formControlName="email">
+                    <span class="help-block" *ngIf="!LoginForm.get('email').valid && LoginForm.get('email').touched">please write a valid Email</span>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+                    <label for="email">Password</label>
+                    <input type="password" id="password" class="form-control" formControlName="password">
+                    <span class="help-block" *ngIf="!LoginForm.get('password').valid && LoginForm.get('password').touched">please write a valid Password</span>
+                </div>
+                
+                <button class="btn btn-primary heading" type="submit" [disabled]="LoginForm.get('password').invalid || LoginForm.get('email').invalid">Login</button>
+                <hr>
+                <span class="help-block">Do not have any Account?</span>
+                <button class="btn btn-info" type="button" (click)="onClickSignUp()">SignUp</button>
+            </form> 
+        </div>
+    </div>
+</div>

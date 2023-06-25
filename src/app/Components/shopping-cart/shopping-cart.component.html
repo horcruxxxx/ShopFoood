@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div style="text-align: center;">
+    <h1>ShoppingCart </h1>
+    <div class="row mainDiv">
+        <div class="col-xs-10">
+            <ul class="list-group">
+                <a class="list-group-item" *ngFor="let items of ShoppingCart;let idx = index">
+                    {{items}}
+                    <button class="btn btn-danger" (click)="onClick(idx)">Delete</button>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>

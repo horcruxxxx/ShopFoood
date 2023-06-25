@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <h1 class="heading"> EDIT </h1>
+            <form [formGroup]="profileForm"  (ngSubmit)="onSubmit()">
+                
+                <!-- USERNAME -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input class="form-control" type="text" id="username" formControlName="username">
+                    <span class="help-block" *ngIf="!profileForm.get('username').valid && profileForm.get('username').touched">please write a valid username</span>
+                </div>
+
+                <!-- homeState URL  -->
+                <div class="form-group">
+                    <label for="homeStateUrl">Select HomeState URL?</label>
+                    <select id="homeStateUrl" class="form-control" formControlName="homeStateUrl">
+                      <option value="My_profile">My Profile</option>
+                      <option value="Recipes">Recipes View</option>
+                      <option value="pro">Pro</option>
+                    </select>
+                    <span class="help-block" *ngIf="!profileForm.get('homeStateUrl').valid && profileForm.get('homeStateUrl').touched">please select a option</span>
+                </div>
+                
+                <button class="btn btn-primary" type="submit" [disabled]="!profileForm.get('homeStateUrl').valid || !profileForm.get('username').valid">Update</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </form> 
+        </div>
+    </div>
+</div>
