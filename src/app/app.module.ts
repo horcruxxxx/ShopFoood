@@ -18,6 +18,7 @@ import { LoadingSpinnerComponent } from './Components/Shared/loading-spinner/loa
 import { ShoppingCartComponent } from './Components/shopping-cart/shopping-cart.component';
 import { RecipeEditComponent } from './Components/recipes/recipe-edit/recipe-edit.component';
 import { HeaderComponent } from './Components/header/header.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { HeaderComponent } from './Components/header/header.component';
     RecipeEditComponent,
   ],
   imports: [
-    BrowserModule,ReactiveFormsModule,RouterLink,AppRouting,HttpClientModule
+    BrowserModule,ReactiveFormsModule,RouterLink,AppRouting,HttpClientModule,FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

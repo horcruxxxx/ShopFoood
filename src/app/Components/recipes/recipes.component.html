@@ -1,4 +1,12 @@
 <app-header></app-header>
+<div class="input-group mb-3" *ngIf="!loading" >
+  <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search">
+  <div class="input-group-append">
+    <button class="btn btn-success" (click)="search()">Search</button>
+    <button class="btn btn-primary" (click)="reset()">Reset</button>
+  </div>
+</div>
+
 
 <!-- DISPLAYING LOADING SPINNER -->
 <div style="text-align: center;" *ngIf="loading">
@@ -6,10 +14,10 @@
 </div>
 
 <!-- DISPLAYING RECIPES -->
-<div class="row" *ngIf="!loading">
+<div class="row" *ngIf="!loading && !searching">
   <div class="col-md-5">
     <div *ngFor="let category of Recipes_Array;let cat_idx = index">
-      <h2>{{ category.category }}</h2>
+      <h2 style="margin-left: 5%;font-family:fantasy;">{{ category.category | uppercase }}</h2>
       <div class="card-group">
         <div class="card" *ngFor="let recipe of category.recipes;let idx = index" style="width: 18rem;">
           <app-recipe-card [currentRecipe]="recipe" [CurrIndex]="idx" [CurrentCategory]="cat_idx" [CurrentRecipeID]="recipe.recipeID"></app-recipe-card>
@@ -18,6 +26,20 @@
     </div>
     <button class="btn btn-primary sticky-button" (click)="onClickAdd()">+</button>
   </div>
+  <div class="col-md-7 editTab">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div *ngIf="searching">
+  <div class="col-md-5">
+    <div class="card-group">
+      <div class="card" *ngFor="let recipe of filteredRecipes;let idx = index" style="width: 18rem;">
+        <app-recipe-card [currentRecipe]="recipe" [CurrIndex]="idx" [CurrentRecipeID]="recipe.recipeID"></app-recipe-card>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary sticky-button" (click)="onClickAdd()">+</button>
   <div class="col-md-7 editTab">
     <router-outlet></router-outlet>
   </div>

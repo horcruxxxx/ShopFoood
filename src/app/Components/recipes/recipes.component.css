@@ -19,3 +19,20 @@
     right: 10px;
 }
 
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+  
+  .input-group .form-control {
+    flex: 1;
+    margin-right: 5px;
+  }
+  
+  .input-group-append {
+    display: flex;
+    gap: 5px;
+  }
+  

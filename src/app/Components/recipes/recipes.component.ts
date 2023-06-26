@@ -12,7 +12,11 @@ import { DataStorageService } from 'src/app/Services/data-storage.service';
 export class RecipesComponent implements OnInit {
 
     Recipes_Array: { category: string, recipes: Recipe[] }[];
+    Orignal_Recipes_Array:Recipe[];
+    filteredRecipes: Recipe[]; // Filtered recipes
+    searchText: string; // Search text entered by user
     loading:boolean = true;
+    searching:boolean = false;
 
     constructor(
       private recipeservice:RecipeService,
@@ -24,6 +28,7 @@ export class RecipesComponent implements OnInit {
     ngOnInit() {
       this.loading = true;
       this.groupRecipesByCategory();
+      this.Orignal_Recipes_Array = this.recipeservice.Recipes_Array.slice();
       this.recipeservice.RecipeChanged.subscribe(() => {
         if (this.recipeservice.Recipes_Array) {
           this.groupRecipesByCategory();
@@ -37,6 +42,7 @@ export class RecipesComponent implements OnInit {
     }
     
     groupRecipesByCategory() {
+      this.Orignal_Recipes_Array = this.recipeservice.Recipes_Array.slice();
       const recipes = this.recipeservice.Recipes_Array.slice();
       const categories = [...new Set(recipes.map(recipe => recipe.recipeCategory))];
       this.Recipes_Array = categories.map(category => {
@@ -45,11 +51,19 @@ export class RecipesComponent implements OnInit {
           recipes: recipes.filter(recipe => recipe.recipeCategory === category)
         };
       });
-      for(let i =0;i<this.Recipes_Array.length;i++){
-        console.log(this.Recipes_Array[i]);
-      }
     }
-  
+    
+    search(){
+      this.searching = true;
+      this.filteredRecipes = this.Orignal_Recipes_Array.filter(recipe =>
+        recipe.recipeName.includes(this.searchText) || recipe.recipeCategory.includes(this.searchText)
+      );
+    }
+    reset(){
+      this.searching = false;
+      this.searchText = "";
+    }
+
     onClickAdd(){
       this.route.navigate(['add'],{relativeTo:this.currentRoute});
     }
