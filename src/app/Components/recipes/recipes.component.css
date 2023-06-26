@@ -13,11 +13,12 @@
     border-radius: 50%;
 }
 
-.editTab{
+.editTab {
     position: fixed;
-    bottom:200px;
+    top: 60%;
     right: 10px;
-}
+    transform: translateY(-50%);
+  }
 
 .input-group {
     display: flex;
