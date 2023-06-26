@@ -35,7 +35,10 @@ export class RecipesComponent implements OnInit {
         }
       });
       this.datastorageService.fetchRecipes();
-      this.loading = false;
+      
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
       if (this.recipeservice.Recipes_Array) {
         this.groupRecipesByCategory();
       }
@@ -54,9 +57,10 @@ export class RecipesComponent implements OnInit {
     }
     
     search(){
+      this.searchText = this.searchText.toLowerCase();
       this.searching = true;
       this.filteredRecipes = this.Orignal_Recipes_Array.filter(recipe =>
-        recipe.recipeName.includes(this.searchText) || recipe.recipeCategory.includes(this.searchText)
+        recipe.recipeName.toLowerCase().includes(this.searchText) || recipe.recipeCategory.toLowerCase().includes(this.searchText)
       );
     }
     reset(){

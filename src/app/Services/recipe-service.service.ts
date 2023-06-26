@@ -27,8 +27,9 @@ export class RecipeService {
     this.RecipeChanged.emit();
   }
 
-  deleteRecipe(index:number){
-    this.Recipes_Array.splice(index,1);
+  deleteRecipe(id:string){
+    const recipeIndex = this.Recipes_Array.findIndex(recipe => recipe.recipeID === id);
+    this.Recipes_Array.splice(recipeIndex,1);
     this.RecipeChanged.emit();
   }
 

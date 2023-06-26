@@ -32,7 +32,10 @@ export class RecipeCardComponent implements OnInit{
   }
 
   onCLickdeleteRecipe(){
-    this.recipeservice.deleteRecipe(this.CurrIndex);
+    this.recipeservice.deleteRecipe(this.CurrentRecipeID);
+    setTimeout(() => {
+      alert("Recipe Deleted!, Dont forgot to save recipe via Manage Dropdown!");
+    }, 1000);
   }
 
   onClickEdit(){

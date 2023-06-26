@@ -27,7 +27,7 @@ export class AddRecipeComponent implements OnInit {
   onSubmit(){
     const newItem:Recipe = new Recipe(
       this.AddRecipe.get('name').value,
-      this.AddRecipe.get('category').value,
+      this.AddRecipe.get('category').value.toLowerCase(),
       this.AddRecipe.get('desc').value,
       this.AddRecipe.get('url').value
     );
@@ -35,6 +35,9 @@ export class AddRecipeComponent implements OnInit {
     this.recipeservice.addRecipe(newItem);
     this.AddRecipe.reset();
     this.route.navigate(['/recipes']);
+    setTimeout(() => {
+      alert("Recipe Added!, Dont forgot to save recipe via Manage Dropdown!");
+    }, 1000);
   }
 
   onCancel(){

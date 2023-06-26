@@ -35,7 +35,7 @@ export class RecipeEditComponent implements OnInit{
     const updatedRecipe: Recipe = {
       ...this.formdataservice.previousData_Recipe,
       recipeName: this.recipeEditForm.get('name').value,
-      recipeCategory: this.recipeEditForm.get('category').value,
+      recipeCategory: this.recipeEditForm.get('category').value.toLowerCase(),
       recipeDescription: this.recipeEditForm.get('desc').value,
       recipeURL: this.recipeEditForm.get('url').value
     };
@@ -43,6 +43,9 @@ export class RecipeEditComponent implements OnInit{
     this.recipeservice.updateRecipe(updatedRecipe);
     this.recipeEditForm.reset();
     this.route.navigate(['/recipes']);
+    setTimeout(() => {
+      alert("Recipe Updated!, Dont forgot to save recipe via Manage Dropdown!");
+    }, 1000);
 
   }
   onCancel(){
