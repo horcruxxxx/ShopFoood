@@ -2,7 +2,7 @@
     margin-top: 30px;
 }
 .editContainer{
-  margin-left: -300px;
+  margin-left: -55%;
 }
 
 input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
@@ -11,8 +11,4 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
   
 input.ng-valid.ng-touched,select.ng-valid.ng-touched{
   border:3px solid green;
-}
-
-.heading{
-  margin-left: 40%;
 }
