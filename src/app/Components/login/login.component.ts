@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormControl,Validators} from '@angular/forms'
 import { Router  } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
+import { DataStorageService } from 'src/app/Services/data-storage.service';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -13,11 +14,13 @@ export class LoginComponent implements OnInit{
   LoginForm :FormGroup;
   loading:boolean = false;
   errorMessage:string = null;
+  homestateURL:string='/recipes';
 
   constructor(
     private route:Router,
     private authservice:AuthService,
     private userservice:UserService,
+    private datastorageservice:DataStorageService
   ){}
 
   ngOnInit(){
@@ -25,36 +28,49 @@ export class LoginComponent implements OnInit{
       'email': new FormControl(null,[Validators.required,Validators.email]),
       'password':new FormControl(null,Validators.required)
     })
+    this.userservice.userDataChanged.subscribe(()=>{
+      this.homestateURL = this.userservice.users_homeStateUrl;
+    })
+    this.homestateURL = this.userservice.getuserdata_homeStateUrl();
   }
 
-  onSubmit(){
-    //base - case
-    if(this.LoginForm.invalid) {
-      return; 
+  async onSubmit() {
+    // Base case
+    if (this.LoginForm.invalid) {
+      return;
     }
-
-    //collecting Form Info.
+  
+    // Collecting Form Info.
     this.loading = true;
     const email = this.LoginForm.get('email').value;
-    const passsword = this.LoginForm.get('password').value;
-
-    //storing the email of currently logged-in user.
+    const password = this.LoginForm.get('password').value;
+  
+    // Storing the email of the currently logged-in user.
     this.userservice.setEmail(email);
-
-    //making http request
-    this.authservice.login(email,passsword).subscribe(Response=>{
-      console.log(Response);
+  
+    try {
+      // Making the HTTP request and fetching the user data
+      await this.authservice.login(email, password).toPromise();
+      const user = await this.datastorageservice.fetchUserByEmail(email).toPromise();
+  
+      // Setting the user data and fetching the home state URL
+      this.userservice.setUserData(user.username, user.homeStateURL);
+      const homeStateURL = this.userservice.getuserdata_homeStateUrl();
+  
+      // Resetting the form and redirecting to the home state URL
       this.loading = false;
       this.LoginForm.reset();
-      this.route.navigate(['/recipes'])
-    },errorRes=>{
-      console.log(errorRes);
-      this.errorMessage = errorRes.error.error.message;
-      if(this.errorMessage==null) this.errorMessage = "Uncaught Error Occured. Try after sometime"; //Edge Case
-      this.loading = false; 
-    });
-
+      this.route.navigate(['/' + homeStateURL]);
+    } catch (error) {
+      console.log(error);
+      this.errorMessage = error.error.error.message;
+      if (this.errorMessage == null) {
+        this.errorMessage = "Uncaught Error Occured. Try after sometime"; // Edge Case
+      }
+      this.loading = false;
+    }
   }
+  
 
   onClickSignUp(){
     this.route.navigate(['/signup']);

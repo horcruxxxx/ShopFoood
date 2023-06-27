@@ -38,7 +38,7 @@ export class RecipesComponent implements OnInit {
       
       setTimeout(() => {
         this.loading = false;
-      }, 500);
+      }, 1000);
       if (this.recipeservice.Recipes_Array) {
         this.groupRecipesByCategory();
       }

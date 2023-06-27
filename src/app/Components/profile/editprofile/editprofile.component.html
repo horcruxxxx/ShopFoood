@@ -15,9 +15,9 @@
                 <div class="form-group">
                     <label for="homeStateUrl">Select HomeState URL?</label>
                     <select id="homeStateUrl" class="form-control" formControlName="homeStateUrl">
-                      <option value="My_profile">My Profile</option>
-                      <option value="Recipes">Recipes View</option>
-                      <option value="pro">Pro</option>
+                        <option value="profile">My Profile</option>
+                        <option value="recipes">Recipes View</option>
+                        <option value="cart">Shopping Cart</option>
                     </select>
                     <span class="help-block" *ngIf="!profileForm.get('homeStateUrl').valid && profileForm.get('homeStateUrl').touched">please select a option</span>
                 </div>

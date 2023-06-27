@@ -42,11 +42,12 @@
                 <div class="form-group">
                     <label for="secret">Select HomeState URL?</label>
                     <select id="secret" class="form-control" formControlName="dropdownURL">
-                      <option value="My_profile">My Profile</option>
-                      <option value="Recipes">Recipes View</option>
-                      <option value="pro">Pro</option>
+                      <option value="profile">My Profile</option>
+                      <option value="recipes">Recipes View</option>
+                      <option value="cart">Shopping Cart</option>
                     </select>
                     <span class="help-block" *ngIf="!SignupForm.get('dropdownURL').valid && SignupForm.get('dropdownURL').touched">please select a option</span>
+                    <span class="help-block">This is to let you start from the same Page(which you select) when you visit our app next time.</span>
                 </div>
                 
                 <button class="btn btn-primary heading" type="submit" [disabled]="!SignupForm.get('dropdownURL').valid || !SignupForm.get('username').valid || !SignupForm.get('email').valid || !SignupForm.get('password').valid">SignUp</button>
