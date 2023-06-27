@@ -25,14 +25,14 @@ export class UserService {
   ) {
 
     //WAITING FOR 2 EVENTS TO HAPPEN ONLY AFTER THAT WE WILL EXECUTE THIS FOR PREPOPULATIN THE VALUES OF USER IN THE "MY PROFILE" COMPONENT. 
-    combineLatest([this.authservice.token_available, this.email_available]).subscribe(() => {
+    combineLatest([this.authservice.token_available_login, this.email_available]).subscribe(() => {
       this.datastorageservice.fetchUserByEmail(this.CurrentEmail).subscribe((user:UserModel)=>{
         this.setUserData(user.username,user.homeStateURL);
       })
     });
 
     // FOR FETCHING ALL REGISTERED USERS.
-    this.authservice.token_available.subscribe(()=>{
+    this.authservice.token_available_signup.subscribe(()=>{
       this.datastorageservice.fetchAllUsers();
     });
 

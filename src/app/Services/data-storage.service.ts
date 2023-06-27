@@ -45,6 +45,7 @@ export class DataStorageService{
     const queryParams = token ? `?auth=${token}` : '';  //edge case when there is no query params.
     return this.http.get<UserModel[]>(`https://shopfood2-default-rtdb.firebaseio.com/userdata.json${queryParams}`).pipe(
       map(users => {
+        console.log(users);
         for (const userKey in users) {
           const userData = users[userKey];
           if (userData.email === email) {
@@ -59,6 +60,11 @@ export class DataStorageService{
     const token = this.authservice.getToken();
     const queryParams = token ? `?auth=${token}` : '';  //edge case when there is no query params.
     return this.http.get<UserModel[]>(`https://shopfood2-default-rtdb.firebaseio.com/userdata.json${queryParams}`).subscribe(Response=>{
+      // const newResponse = [];
+      // for(let i=0;i<9;i++){
+      //   newResponse.push(Response[i]);
+      // }
+      // this.recipeservice.setUsers(newResponse);
       this.recipeservice.setUsers(Response);
     });
   } 

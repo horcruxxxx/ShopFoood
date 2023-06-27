@@ -46,6 +46,7 @@ export class RecipeService {
   }
 
   addUser(newUser:UserModel){
+    this.Users_Array = [];
     this.Users_Array.push(newUser);
   }
 

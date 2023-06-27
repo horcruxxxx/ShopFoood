@@ -27,7 +27,8 @@ interface AuthResponseLogin{
 export class AuthService {
 
   public token:string = null;
-  token_available = new EventEmitter<null>();
+  token_available_signup = new EventEmitter<null>();
+  token_available_login = new EventEmitter<null>();
   constructor(private http:HttpClient) {}
 
   signUp(email:string,password:string){
@@ -39,7 +40,7 @@ export class AuthService {
     .pipe(          // Storing the token
       tap((response: AuthResponseLogin) => {
         this.token = response.idToken; 
-        this.token_available.emit();
+        this.token_available_signup.emit();
       })
     );
   }
@@ -53,7 +54,7 @@ export class AuthService {
     .pipe(          // Storing the token
       tap((response: AuthResponseLogin) => {
         this.token = response.idToken; 
-        this.token_available.emit();
+        this.token_available_login.emit();
       })
     );
   }
