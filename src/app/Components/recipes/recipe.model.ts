@@ -8,7 +8,7 @@ export class Recipe {
   recipeURL: string;
 
   constructor(name: string, caty: string, desc: string, url: string) {
-    this.recipeID = uuidv4(); // Unique ID generated using UUID
+    this.recipeID = uuidv4(); // Unique ID generated using UUID for Detecting every item uniquely
     this.recipeName = name;
     this.recipeCategory = caty;
     this.recipeDescription = desc;

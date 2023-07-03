@@ -60,12 +60,16 @@ export class DataStorageService{
     const token = this.authservice.getToken();
     const queryParams = token ? `?auth=${token}` : '';  //edge case when there is no query params.
     return this.http.get<UserModel[]>(`https://shopfood2-default-rtdb.firebaseio.com/userdata.json${queryParams}`).subscribe(Response=>{
+      this.recipeservice.setUsers(Response);
+
+      
+      //code to remove entries from the database...(not related to the application)
+
       // const newResponse = [];
       // for(let i=0;i<9;i++){
       //   newResponse.push(Response[i]);
       // }
-      // this.recipeservice.setUsers(newResponse);
-      this.recipeservice.setUsers(Response);
+
     });
   } 
 }

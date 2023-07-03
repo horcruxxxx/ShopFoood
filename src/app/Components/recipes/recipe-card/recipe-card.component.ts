@@ -39,6 +39,7 @@ export class RecipeCardComponent implements OnInit{
   }
 
   onClickEdit(){
+    // STORING THE INFO. ABUT THE RECIPE WHICH GET SELECTED BY THE USER FOR FURTHER UPDATES THAT USER MIGHT DO. 
     this.formdataservice.set_IndexOfPreviousRecipe(this.CurrIndex);
     this.formdataservice.set_previousData_Recipe(this.currentRecipe);
     this.formdataservice.set_CurrentRecipeID(this.CurrentRecipeID);

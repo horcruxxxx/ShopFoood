@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit{
     const email = this.LoginForm.get('email').value;
     const password = this.LoginForm.get('password').value;
   
-    console.log("email = " + email + " password " + password);
     // Storing the email of the currently logged-in user.
     this.userservice.setEmail(email);
   
@@ -65,8 +64,7 @@ export class LoginComponent implements OnInit{
       this.LoginForm.reset();
       this.route.navigate(['/' + homeStateURL]);
     } catch (error) {
-      console.log(error);
-      this.errorMessage = (error) ? error.message : "Uncaught Error Occured. Try after sometime";
+      this.errorMessage = (error) ? "incorrect Password or Email" : "Uncaught Error Occured. Try after sometime";
       this.loading = false;
     }
   }

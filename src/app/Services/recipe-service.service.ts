@@ -21,9 +21,7 @@ export class RecipeService {
 
   addRecipe(newRecipe:Recipe){
     this.Recipes_Array = this.Recipes_Array || [];
-    console.log("one");
     this.Recipes_Array.push(newRecipe);
-    console.log("two");
     this.RecipeChanged.emit();
   }
 

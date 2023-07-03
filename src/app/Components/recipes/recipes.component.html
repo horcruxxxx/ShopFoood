@@ -1,3 +1,4 @@
+<!-- SEARCH BAR -->
 <div class="input-group mb-3" *ngIf="!loading" >
   <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search">
   <div class="input-group-append">
@@ -12,7 +13,7 @@
     <app-loading-spinner></app-loading-spinner>
 </div>
 
-<!-- DISPLAYING RECIPES -->
+<!-- DISPLAYING RECIPES AS PER CATEGORIES -->
 <div class="row" *ngIf="!loading && !searching">
   <div class="col-md-5">
     <div *ngFor="let category of Recipes_Array;let cat_idx = index">
@@ -30,6 +31,7 @@
   </div>
 </div>
 
+<!-- DISPLAYING RECIPES FOR SEARCHED TEXT  -->
 <div *ngIf="searching">
   <div class="col-md-5">
     <div class="card-group">

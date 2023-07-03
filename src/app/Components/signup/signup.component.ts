@@ -52,7 +52,6 @@ export class SignupComponent {
 
     // making http Request
     this.Authservice.signUp(email,password).subscribe(Response=>{
-      console.log(Response);
       this.loading = false;
       this.SignupForm.reset();
       this.route.navigate(['/login']);

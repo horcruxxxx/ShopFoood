@@ -13,7 +13,7 @@ export class RecipesComponent implements OnInit {
 
     Recipes_Array: { category: string, recipes: Recipe[] }[];
     Orignal_Recipes_Array:Recipe[];
-    filteredRecipes: Recipe[]; // Filtered recipes
+    filteredRecipes: Recipe[]; // Filtered recipes as we are only showing all the recipes irrespective of the category.
     searchText: string; // Search text entered by user
     loading:boolean = true;
     searching:boolean = false;
