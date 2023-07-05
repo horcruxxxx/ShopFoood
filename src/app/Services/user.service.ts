@@ -13,6 +13,7 @@ export class UserService {
   userData:UserModel[]=[];
   users_Username:string='empty';
   users_homeStateUrl:string = 'empty';
+  currentUser:UserModel;
   CurrentEmail:string;
   email_available = new EventEmitter<null>();
 
@@ -28,11 +29,18 @@ export class UserService {
     combineLatest([this.authservice.token_available_login, this.email_available]).subscribe(() => {
       this.datastorageservice.fetchUserByEmail(this.CurrentEmail).subscribe((user:UserModel)=>{
         this.setUserData(user.username,user.homeStateURL);
+        this.currentUser = user;
       })
     });
 
-    // FOR FETCHING ALL REGISTERED USERS.
+    // FOR FETCHING ALL REGISTERED USERS when signin.
     this.authservice.token_available_signup.subscribe(()=>{
+      this.datastorageservice.fetchAllUsers();
+    });
+
+    // FOR FETCHING ALL REGISTERED USERS when login.
+    this.authservice.token_available_login.subscribe(()=>{
+      this.recipeservice.Users_Array=[];
       this.datastorageservice.fetchAllUsers();
     });
 
@@ -52,6 +60,12 @@ export class UserService {
     this.users_Username = currentUsername;
     this.users_homeStateUrl = currentHomeStateUrl;
     this.userDataChanged.emit();
+  }
+
+  UpdateUserData(currentUser:UserModel){
+      const userIndex = this.recipeservice.Users_Array.findIndex(user => user.email === currentUser.email);
+      this.recipeservice.Users_Array.splice(userIndex,1,currentUser);
+      this.datastorageservice.storeUserData(this.recipeservice.Users_Array);
   }
 
   get_userData(){

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/Services/user.service';
+import { UserModel } from 'src/app/User.model';
 
 @Component({
   selector: 'app-editprofile',
@@ -34,7 +35,14 @@ export class EditprofileComponent implements OnInit{
       this.username =  this.profileForm.get('username').value;
       this.homeStateUrl = this.profileForm.get('homeStateUrl').value;
 
+      const updatedUser: UserModel = {
+        ...this.userservice.currentUser,
+        username :  this.username,
+        homeStateURL : this.homeStateUrl
+      };
       this.userservice.setUserData(this.username,this.homeStateUrl);
+      this.userservice.UpdateUserData(updatedUser);
+      
       this.route.navigate(['/profile']);
     }
 
